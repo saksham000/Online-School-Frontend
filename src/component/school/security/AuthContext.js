@@ -1,5 +1,5 @@
-import { executeJwtAuthService } from "../school/api/AuthApiService";
-import { apiClient } from "../school/api/ApiClient";
+import { apiClient } from "../api/ApiClient";
+import { executeJwtAuthService } from "../api/AuthApiService";
 import { createContext, useContext, useState } from "react";
 
 export const AuthContext = createContext();
