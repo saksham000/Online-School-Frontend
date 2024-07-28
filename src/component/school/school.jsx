@@ -2,9 +2,14 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import Welcome from "./Welcome";
 import AuthProvider, { useAuth } from "./security/AuthContext";
-import Teacher from "./teacher/Teacher";
-import Student from "./student/Student";
-import Admin from "./admin/Admin";
+import StudentPanel from "./student/StudentPanel";
+import OldStudent from "./student/OldStudent";
+import ErrorComponent from "./ErrorComponent";
+import TeacherPanel from "./teacher/TeacherPanel";
+import OldTeacher from "./teacher/OldTeacher";
+import AdminPanel from "./admin/AdminPanel";
+import LoginAdmin from "./admin/LoginAdmin";
+import AdminConsole from "./admin/AdminConsole";
 
 function AuthRoute({ children }) {
   const authContext = useAuth();
@@ -31,15 +36,31 @@ export default function School() {
               path="/teacher"
               element={
                 <AuthRoute>
-                  <Teacher />
+                  <TeacherPanel />
                 </AuthRoute>
               }
             />
             <Route
-              path="/student"
+              path="/oldteacher"
               element={
                 <AuthRoute>
-                  <Student />
+                  <OldTeacher />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/studentpanel"
+              element={
+                <AuthRoute>
+                  <StudentPanel />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/oldstudent"
+              element={
+                <AuthRoute>
+                  <OldStudent />
                 </AuthRoute>
               }
             />
@@ -47,10 +68,27 @@ export default function School() {
               path="/admin"
               element={
                 <AuthRoute>
-                  <Admin />
+                  <AdminPanel />
                 </AuthRoute>
               }
             />
+            <Route
+              path="/adminlogin"
+              element={
+                <AuthRoute>
+                  <LoginAdmin />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/adminconsole"
+              element={
+                <AuthRoute>
+                  <AdminConsole />
+                </AuthRoute>
+              }
+            />
+            <Route path="*" element={<ErrorComponent />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
