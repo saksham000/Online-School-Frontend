@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import { findTeacherById } from "../api/teacher/teacherService";
+import { findTeacherById } from "../api/teacherService";
 
 export default function OldTeacher() {
   const [teacherId, setTeacherId] = useState(null);

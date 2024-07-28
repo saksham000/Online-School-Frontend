@@ -2,14 +2,14 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import Welcome from "./Welcome";
 import AuthProvider, { useAuth } from "./security/AuthContext";
-import StudentPanel from "./student/StudentPanel";
 import OldStudent from "./student/OldStudent";
 import ErrorComponent from "./ErrorComponent";
-import TeacherPanel from "./teacher/TeacherPanel";
 import OldTeacher from "./teacher/OldTeacher";
 import AdminPanel from "./admin/AdminPanel";
 import LoginAdmin from "./admin/LoginAdmin";
 import AdminConsole from "./admin/AdminConsole";
+import CreateAdmin from "./admin/CreateAdmin";
+import AssignedClass from "./teacher/AssignedClass";
 
 function AuthRoute({ children }) {
   const authContext = useAuth();
@@ -33,14 +33,6 @@ export default function School() {
               }
             />
             <Route
-              path="/teacher"
-              element={
-                <AuthRoute>
-                  <TeacherPanel />
-                </AuthRoute>
-              }
-            />
-            <Route
               path="/oldteacher"
               element={
                 <AuthRoute>
@@ -49,10 +41,10 @@ export default function School() {
               }
             />
             <Route
-              path="/studentpanel"
+              path="/assignedclass"
               element={
                 <AuthRoute>
-                  <StudentPanel />
+                  <AssignedClass />
                 </AuthRoute>
               }
             />
@@ -77,6 +69,14 @@ export default function School() {
               element={
                 <AuthRoute>
                   <LoginAdmin />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/newadmin"
+              element={
+                <AuthRoute>
+                  <CreateAdmin />
                 </AuthRoute>
               }
             />

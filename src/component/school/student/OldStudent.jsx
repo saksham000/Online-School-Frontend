@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import { findStudenById } from "../api/student/studentService";
+import { findStudenById } from "../api/studentService";
 
 export default function OldStudent() {
   const [studentId, setStudentId] = useState(null);
