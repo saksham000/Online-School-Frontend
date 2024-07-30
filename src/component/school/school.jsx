@@ -10,6 +10,9 @@ import LoginAdmin from "./admin/LoginAdmin";
 import AdminConsole from "./admin/AdminConsole";
 import CreateAdmin from "./admin/CreateAdmin";
 import AssignedClass from "./teacher/AssignedClass";
+import StudentClass from "./student/StudentClass";
+import StudentJoinRoom from "./student/StudentJoinRoom";
+import HostMeeting from "./teacher/HostMeeting";
 
 function AuthRoute({ children }) {
   const authContext = useAuth();
@@ -41,10 +44,18 @@ export default function School() {
               }
             />
             <Route
-              path="/assignedclass"
+              path="/assignedclass/:assignedClassId"
               element={
                 <AuthRoute>
                   <AssignedClass />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/hostmeeting/:teacherName/:teacherId"
+              element={
+                <AuthRoute>
+                  <HostMeeting />
                 </AuthRoute>
               }
             />
@@ -53,6 +64,22 @@ export default function School() {
               element={
                 <AuthRoute>
                   <OldStudent />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/studentclass/:studentId"
+              element={
+                <AuthRoute>
+                  <StudentClass />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/studentjoinroom/:studentName/:studentRollNumber/:studentJoinRoomId"
+              element={
+                <AuthRoute>
+                  <StudentJoinRoom />
                 </AuthRoute>
               }
             />

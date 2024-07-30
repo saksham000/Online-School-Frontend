@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { findStudenById } from "../api/studentService";
 
 export default function OldStudent() {
@@ -21,7 +21,7 @@ export default function OldStudent() {
             responseStudentId === parseInt(studentId) &&
             responseStudentName === studentName
           ) {
-            navigate(`/studentclass`);
+            navigate(`/studentclass/${responseStudentId}`);
             setErrorMessage("");
           } else {
             setErrorMessage("User ID and Username does not matched");

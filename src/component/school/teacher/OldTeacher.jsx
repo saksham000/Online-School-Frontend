@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { findTeacherById } from "../api/teacherService";
 
 export default function OldTeacher() {
@@ -7,7 +7,7 @@ export default function OldTeacher() {
   const [teacherName, setTeacherName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [assignedClassId, setAssignedClassId] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handelTeacherCheck = async (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ export default function OldTeacher() {
             responseTeacherName === teacherName &&
             responseAssignedClassId === parseInt(assignedClassId)
           ) {
-            navigate(`/assignedclass`)
+            navigate(`/assignedclass/${assignedClassId}`);
             setErrorMessage("");
           } else {
             setErrorMessage("User ID and Username does not matched");

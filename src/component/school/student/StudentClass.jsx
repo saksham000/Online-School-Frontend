@@ -1,29 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import { findClassById } from "../api/classService";
 import { useNavigate, useParams } from "react-router-dom";
+import { findStudenById } from "../api/studentService";
 
-export default function AssignedClass() {
+export default function StudentClass() {
   const [subjects, setSubjects] = useState([]);
-  const [error, setError] = useState("");
-  const [teachername, setTeacherName] = useState("");
-  const [teacherid, setTeacherId] = useState(null);
-  const { assignedClassId } = useParams();
+  const [error, setError] = useState();
+  const [roomId, setRoomId] = useState({});
+  const [studentname, setStudentName] = useState();
+  const [studentRollNumber, setStudentRollNumber] = useState(null);
+  const { studentId } = useParams();
   const navigate = useNavigate();
+
   const fetchCalledRef = useRef(false);
 
-  const fetchClassData = async () => {
+  const fetchStudentSubjects = async () => {
     try {
-      await findClassById(assignedClassId).then((response) => {
+      await findStudenById(studentId).then((response) => {
         if (response.status === 200) {
+          console.log(response.data);
+          const { studentName: studentname, rollNumber: studentRollNumber } =
+            response.data;
+          setStudentRollNumber(studentRollNumber);
+          setStudentName(studentname);
           const responseData = response.data;
-          const allSubjects = responseData.students.flatMap(
-            (student) => student.subjects
-          );
-          const { teacherName: teachername, teacherId: teacherid } =
-            responseData.teacher;
-          setTeacherName(teachername);
-          setTeacherId(teacherid);
-          setSubjects(allSubjects);
+          setSubjects(responseData.subjects);
           setError("");
         }
       });
@@ -31,13 +31,28 @@ export default function AssignedClass() {
       setError("Invalid Class Id !");
     }
   };
-  const handelNewMeetingButton = () => {
-    navigate(`/hostmeeting/${teachername}/${teacherid}`);
+
+  const joinRoomHandelar = (subjectId) => {
+    const id = roomId[subjectId];
+    if (!id) {
+      alert("Please enter a room ID!");
+      return;
+    }
+    navigate(
+      `/studentjoinroom/${studentname}/${studentRollNumber}/${roomId[subjectId]}`
+    );
+  };
+
+  const handleRoomIdChange = (subjectId, value) => {
+    setRoomId((prevRoomIds) => ({
+      ...prevRoomIds,
+      [subjectId]: value,
+    }));
   };
 
   useEffect(() => {
     if (!fetchCalledRef.current) {
-      fetchClassData();
+      fetchStudentSubjects();
       fetchCalledRef.current = true;
     }
   });
@@ -65,7 +80,7 @@ export default function AssignedClass() {
                   Subject Name
                 </th>
                 <th className="w-20 p-3 text-2xl font-semibold tracking-wide text-center">
-                  Start Metting ?
+                  Join Metting ?
                 </th>
               </tr>
             </thead>
@@ -82,11 +97,22 @@ export default function AssignedClass() {
                     {subject.subjectName}
                   </td>
                   <td className="p-3 text-lg text-black font-semibold whitespace-nowrap">
+                    <input
+                      id="roomId"
+                      type="number"
+                      placeholder="Room Id"
+                      value={roomId[subject.subjectId] || ""}
+                      required
+                      onChange={(e) =>
+                        handleRoomIdChange(subject.subjectId, e.target.value)
+                      }
+                      className="shadow appearance-none border rounded w-32 mr-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
                     <button
-                      className="p-3 bg-green-500 rounded-full font-semibold text-black border border-purple-500 hover:outline-none hover:ring-2 hover:ring-purple-500"
-                      onClick={handelNewMeetingButton}
+                      className="p-3 bg-green-500 rounded-lg font-semibold text-black border border-purple-500 hover:outline-none hover:ring-2 hover:ring-purple-500"
+                      onClick={() => joinRoomHandelar(subject.subjectId)}
                     >
-                      Start Metting
+                      Join
                     </button>
                   </td>
                 </tr>
