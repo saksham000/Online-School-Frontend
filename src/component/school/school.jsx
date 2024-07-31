@@ -13,6 +13,10 @@ import AssignedClass from "./teacher/AssignedClass";
 import StudentClass from "./student/StudentClass";
 import StudentJoinRoom from "./student/StudentJoinRoom";
 import HostMeeting from "./teacher/HostMeeting";
+import AdminManagement from "./admin/management/AdminManagement";
+import TeacherManagement from "./admin/management/TeacherManagement";
+import StudentManagement from "./admin/management/StudentManagement";
+import ClassManagement from "./admin/management/ClassManagement";
 
 function AuthRoute({ children }) {
   const authContext = useAuth();
@@ -112,6 +116,38 @@ export default function School() {
               element={
                 <AuthRoute>
                   <AdminConsole />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/manageadmins"
+              element={
+                <AuthRoute>
+                  <AdminManagement />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/manageteachers"
+              element={
+                <AuthRoute>
+                  <TeacherManagement />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/manageclass"
+              element={
+                <AuthRoute>
+                  <ClassManagement />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/managestudents"
+              element={
+                <AuthRoute>
+                  <StudentManagement />
                 </AuthRoute>
               }
             />
