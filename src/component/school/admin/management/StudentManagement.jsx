@@ -8,14 +8,17 @@ import {
   assigneSubjectToStudentService,
   deleteSubjectByIdService,
 } from "../../api/subjectService";
+import { assigneClassToStudentService } from "../../api/classService";
 
 export default function StudentManagement() {
   const [students, setStudents] = useState([]);
   const [studentName, setStudentName] = useState("");
   const [stId, setStId] = useState(null);
   const [studentId, setStudentId] = useState(null);
+  const [classStudentId, setClassStudentId] = useState(null);
   const [subId, setSubId] = useState(null);
   const [subjectName, setSubjectName] = useState("");
+  const [classId, setClassId] = useState(null);
 
   const listAllStudents = async () => {
     await fetchAllStudents().then((response) => {
@@ -56,6 +59,18 @@ export default function StudentManagement() {
     );
   };
 
+  const assigenClassStudent = async (e) => {
+    e.preventDefault();
+    await assigneClassToStudentService(classId, classStudentId).then(
+      (response) => {
+        if (response.status === 200) {
+          alert("Class is Assigned To Student !");
+          listAllStudents();
+        }
+      }
+    );
+  };
+
   const deleteSubjectOfStudentById = async (e) => {
     e.preventDefault();
     await deleteSubjectByIdService(stId, subId).then((response) => {
@@ -69,8 +84,12 @@ export default function StudentManagement() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-fuchsia-500 to-lime-600">
       <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">Manage Students</h1>
+        <h1 className="text-2xl font-bold mb-4 bg-green-500 p-3">
+          Student Management
+        </h1>
         <div className="mb-4">
+          <h1 className="text-2xl font-bold mb-4">Create New Students</h1>
+
           <form onSubmit={createStudent} className="flex flex-col space-y-2">
             <input
               type="text"
@@ -121,6 +140,38 @@ export default function StudentManagement() {
               </button>
             </form>
           </div>
+
+          <h1 className="text-2xl font-bold mb-4">Assigne Class to Student</h1>
+          <div className="mb-4">
+            <form
+              onSubmit={assigenClassStudent}
+              className="flex flex-col space-y-2"
+            >
+              <input
+                type="text"
+                value={classId || ""}
+                onChange={(e) => setClassId(e.target.value)}
+                placeholder="Class Id"
+                className="border p-2"
+                required
+              />
+              <input
+                type="text"
+                value={classStudentId}
+                onChange={(e) => setClassStudentId(e.target.value)}
+                placeholder="Student Id"
+                className="border p-2"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 text-white p-2 rounded"
+              >
+                Assigne Subject
+              </button>
+            </form>
+          </div>
+
           <h1 className="text-2xl font-bold mb-4">Delete Assigned Subject</h1>
           <div className="mb-4">
             <form
@@ -160,7 +211,7 @@ export default function StudentManagement() {
             Click Here to List Students
           </button>
           {students.length === 0 ? (
-            <p>No shows available</p>
+            <p>No Student available</p>
           ) : (
             <div>
               <table className="w-full">
