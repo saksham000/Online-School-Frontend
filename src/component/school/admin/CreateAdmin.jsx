@@ -17,7 +17,7 @@ export default function CreateAdmin() {
           setMessage("Admin is Created Your Id is: " + adminnId);
           setErrorMessage("");
         } else {
-          throw new Error("Invalid Server Error");
+          alert("Invalid Server Error");
         }
       })
       .catch(() => {

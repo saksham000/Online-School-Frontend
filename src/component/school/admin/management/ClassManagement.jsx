@@ -28,21 +28,23 @@ export default function ClassManagement() {
     });
   };
 
-  const deleteClass = async (classId) => {
-    await deleteClassByIdService(classId).then((response) => {
-      if (response.status === 200) {
-        alert("Class is Deleted !");
-        listAllClasses();
-      }
-    });
-  };
-
   useEffect(() => {
     if (shouldListClasses) {
       listAllClasses();
       setShouldListClasses(false);
     }
   }, [shouldListClasses]);
+
+  const deleteClass = async (classId) => {
+    await deleteClassByIdService(classId).then((response) => {
+      if (response.status === 200) {
+        alert("Class is Deleted !");
+        listAllClasses();
+      }
+    }).catch(()=>{
+      alert("Inavlid ClassID")
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-fuchsia-500 to-lime-600">
@@ -55,7 +57,7 @@ export default function ClassManagement() {
                 type="text"
                 value={className || ""}
                 onChange={(e) => setClassName(e.target.value)}
-                placeholder="Student Id"
+                placeholder="Class Name"
                 className="border p-2"
                 required
               />

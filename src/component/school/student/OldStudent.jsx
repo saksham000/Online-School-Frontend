@@ -27,7 +27,7 @@ export default function OldStudent() {
             setErrorMessage("User ID and Username does not matched");
           }
         } else {
-          throw new Error("Invalid Server Error");
+          alert("Invalid Server Error");
         }
       })
       .catch(() => {

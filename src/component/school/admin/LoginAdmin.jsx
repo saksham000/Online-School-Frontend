@@ -17,7 +17,7 @@ export default function LoginAdmin() {
           navigate(`/adminconsole`);
           setErrorMessage("");
         } else {
-          throw new Error("Invalid Server Error");
+          alert("Invalid Server Error");
         }
       })
       .catch(() => {

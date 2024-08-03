@@ -44,6 +44,8 @@ export default function StudentManagement() {
         alert("Student is Deleted !");
         listAllStudents();
       }
+    }).catch(()=>{
+      alert("Invalid Student Id !");
     });
   };
 
@@ -56,19 +58,22 @@ export default function StudentManagement() {
           listAllStudents();
         }
       }
-    );
+    ).catch(()=>{
+      alert("Inavlid Student Id");
+    });
   };
 
   const assigenClassStudent = async (e) => {
     e.preventDefault();
-    await assigneClassToStudentService(classId, classStudentId).then(
-      (response) => {
+    await assigneClassToStudentService(classId, classStudentId)
+      .then((response) => {
         if (response.status === 200) {
           alert("Class is Assigned To Student !");
           listAllStudents();
         }
-      }
-    );
+      }).catch(() => {
+        alert("Invalid ClassId or StudentId");
+      });
   };
 
   const deleteSubjectOfStudentById = async (e) => {
@@ -78,6 +83,8 @@ export default function StudentManagement() {
         alert("Subject is Deleted !");
         listAllStudents();
       }
+    }).catch(()=>{
+      alert("Invalid SubjectId or StudentId")
     });
   };
 

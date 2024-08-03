@@ -17,6 +17,8 @@ export default function AdminManagement() {
       if (response.status === 200) {
         alert("Admin is Deleted !");
       }
+    }).catch(()=>{
+      alert("Invalid AdminID")
     });
   };
 

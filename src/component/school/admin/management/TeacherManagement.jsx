@@ -37,6 +37,8 @@ export default function TeacherManagement() {
         alert("Class Assigned to Teacher !");
         listAllTeachers();
       }
+    }).catch(()=>{
+      alert("Inavlid ClassId or TeacherId")
     });
   };
 
@@ -46,6 +48,8 @@ export default function TeacherManagement() {
         alert("Teacher Deleted !");
         listAllTeachers();
       }
+    }).catch(()=>{
+      alert("Inavlid Teacher ID")
     });
   };
 
@@ -63,7 +67,7 @@ export default function TeacherManagement() {
               type="text"
               value={teacherName}
               onChange={(e) => setTeacherName(e.target.value)}
-              placeholder="Student Name"
+              placeholder="Teacher Name"
               className="border p-2"
               required
             />
