@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { deleteAdminById, fetchAllAdmins } from "../../api/adminService";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AdminManagement() {
   const [admins, setAdmins] = useState([]);
@@ -13,13 +15,35 @@ export default function AdminManagement() {
   };
 
   const deleteAdmin = async (adminId) => {
-    await deleteAdminById(adminId).then((response) => {
-      if (response.status === 200) {
-        alert("Admin is Deleted !");
-      }
-    }).catch(()=>{
-      alert("Invalid AdminID")
-    });
+    await deleteAdminById(adminId)
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("Admin is Deleted !", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        }
+      })
+      .catch(() => {
+        toast.warn("Internal Server Error !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      });
   };
 
   useEffect(() => {
@@ -77,6 +101,7 @@ export default function AdminManagement() {
           )}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

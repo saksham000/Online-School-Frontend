@@ -16,8 +16,6 @@ export default function CreateAdmin() {
           const { adminId: adminnId } = response.data;
           setMessage("Admin is Created Your Id is: " + adminnId);
           setErrorMessage("");
-        } else {
-          alert("Invalid Server Error");
         }
       })
       .catch(() => {

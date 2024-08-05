@@ -29,8 +29,6 @@ export default function OldTeacher() {
           } else {
             setErrorMessage("User ID and Username does not matched");
           }
-        } else {
-          alert("Invalid Server Error");
         }
       })
       .catch(() => {

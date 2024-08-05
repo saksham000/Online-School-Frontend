@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { findStudenById } from "../api/studentService";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function StudentClass() {
   const [subjects, setSubjects] = useState([]);
@@ -35,7 +37,17 @@ export default function StudentClass() {
   const joinRoomHandelar = (subjectId) => {
     const id = roomId[subjectId];
     if (!id) {
-      alert("Please enter a room ID!");
+      toast.warn("Please Enter RoomId !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
       return;
     }
     navigate(
@@ -121,6 +133,7 @@ export default function StudentClass() {
           </table>
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 }

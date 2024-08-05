@@ -4,6 +4,8 @@ import {
   deleteClassByIdService,
   fetchAllClasses,
 } from "../../api/classService";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ClassManagement() {
   const [classes, setClasses] = useState([]);
@@ -22,7 +24,17 @@ export default function ClassManagement() {
     e.preventDefault();
     await createNewClassService(className).then((response) => {
       if (response.status === 200) {
-        alert("Class Created !");
+        toast.success("Class is Created !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         setShouldListClasses(true);
       }
     });
@@ -36,14 +48,36 @@ export default function ClassManagement() {
   }, [shouldListClasses]);
 
   const deleteClass = async (classId) => {
-    await deleteClassByIdService(classId).then((response) => {
-      if (response.status === 200) {
-        alert("Class is Deleted !");
-        listAllClasses();
-      }
-    }).catch(()=>{
-      alert("Inavlid ClassID")
-    });
+    await deleteClassByIdService(classId)
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("Class is Deleted !", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+          listAllClasses();
+        }
+      })
+      .catch(() => {
+        toast.error("Server Error !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      });
   };
 
   return (
@@ -153,6 +187,7 @@ export default function ClassManagement() {
           )}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

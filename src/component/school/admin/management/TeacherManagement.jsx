@@ -5,6 +5,8 @@ import {
   deleteTeacherByIdService,
   fetchAllTeachers,
 } from "../../api/teacherService";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function TeacherManagement() {
   const [teachers, setTeachers] = useState([]);
@@ -24,7 +26,17 @@ export default function TeacherManagement() {
     e.preventDefault();
     await createNewTeacher(teacherName).then((response) => {
       if (response.status === 200) {
-        alert("Teacher is Created !");
+        toast.success("Teacher is Created !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         listAllTeachers();
       }
     });
@@ -34,22 +46,62 @@ export default function TeacherManagement() {
     e.preventDefault();
     await assigneClassToTeacherService(classId, teacherId).then((response) => {
       if (response.status === 200) {
-        alert("Class Assigned to Teacher !");
+        toast.success("Class Assigned !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         listAllTeachers();
       }
     }).catch(()=>{
-      alert("Inavlid ClassId or TeacherId")
+      toast.warn("Invalid Class or Teacher Id !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     });
   };
 
   const deleteTeacher = async (tId) => {
     await deleteTeacherByIdService(tId).then((response) => {
       if (response.status === 200) {
-        alert("Teacher Deleted !");
+        toast.success("Teacher is Deleted !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         listAllTeachers();
       }
     }).catch(()=>{
-      alert("Inavlid Teacher ID")
+      toast.warn("Invalid Teacher Id !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     });
   };
 
@@ -170,6 +222,7 @@ export default function TeacherManagement() {
           )}
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

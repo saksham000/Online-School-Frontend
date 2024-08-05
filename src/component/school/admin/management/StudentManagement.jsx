@@ -9,6 +9,8 @@ import {
   deleteSubjectByIdService,
 } from "../../api/subjectService";
 import { assigneClassToStudentService } from "../../api/classService";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function StudentManagement() {
   const [students, setStudents] = useState([]);
@@ -32,20 +34,62 @@ export default function StudentManagement() {
     e.preventDefault();
     await createNewStudent(studentName).then((response) => {
       if (response.status === 200) {
-        alert("Student is Created !");
+        toast.success("Student is Created !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         listAllStudents();
       }
+    }).catch(()=>{
+      toast.warn("Internal Server Error !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     });
   };
 
   const deleteStudentById = async (studentId) => {
     await deleteStudentByIdService(studentId).then((response) => {
       if (response.status === 200) {
-        alert("Student is Deleted !");
+        toast.success("Student is Deleted !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         listAllStudents();
       }
     }).catch(()=>{
-      alert("Invalid Student Id !");
+      toast.warn("Invalid Student Id !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     });
   };
 
@@ -54,12 +98,32 @@ export default function StudentManagement() {
     await assigneSubjectToStudentService(studentId, subjectName).then(
       (response) => {
         if (response.status === 200) {
-          alert("Subject is Assigned !");
+          toast.success("Subject is Assigned !", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
           listAllStudents();
         }
       }
     ).catch(()=>{
-      alert("Inavlid Student Id");
+      toast.warn("Invalid Student Id !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     });
   };
 
@@ -68,11 +132,31 @@ export default function StudentManagement() {
     await assigneClassToStudentService(classId, classStudentId)
       .then((response) => {
         if (response.status === 200) {
-          alert("Class is Assigned To Student !");
+          toast.success("Class is Assigned!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
           listAllStudents();
         }
       }).catch(() => {
-        alert("Invalid ClassId or StudentId");
+        toast.warn("Invalid Student Id or Class Id !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
       });
   };
 
@@ -80,11 +164,31 @@ export default function StudentManagement() {
     e.preventDefault();
     await deleteSubjectByIdService(stId, subId).then((response) => {
       if (response.status === 200) {
-        alert("Subject is Deleted !");
+        toast.success("Subject is Deleted !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         listAllStudents();
       }
     }).catch(()=>{
-      alert("Invalid SubjectId or StudentId")
+      toast.warn("Invalid Student Id or Subject Id !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     });
   };
 
@@ -292,6 +396,7 @@ export default function StudentManagement() {
           )}
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

@@ -16,8 +16,6 @@ export default function LoginAdmin() {
         if (response.status === 200) {
           navigate(`/adminconsole`);
           setErrorMessage("");
-        } else {
-          alert("Invalid Server Error");
         }
       })
       .catch(() => {
