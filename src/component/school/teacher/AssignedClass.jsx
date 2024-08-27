@@ -40,7 +40,7 @@ export default function AssignedClass() {
       fetchClassData();
       fetchCalledRef.current = true;
     }
-  });
+  },[]);
 
   return (
     <div className="h-screen p-4 bg-gradient-to-r from-fuchsia-500 to-lime-600">
