@@ -1,21 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Campus.css'
-import gallery_1 from '../../assets/gallery-1.png'
-import gallery_2 from '../../assets/gallery-2.png'
-import gallery_3 from '../../assets/gallery-3.png'
-import gallery_4 from '../../assets/gallery-4.png'
+import s4 from '../../assets/students/s4.jpg'
+import s5 from '../../assets/students/s5.jpg'
+import s6 from '../../assets/students/s6.jpg'
+import s7 from '../../assets/students/s7.jpg'
 import white_arrow from '../../assets/white-arrow.png'
-
+import 'aos/dist/aos.css';
+import Aos from "aos";
 const Campus = () => {
+    useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   return (
     <div className='campus'>
       <div className="gallery">
-        <img src={gallery_1} alt="" />
-        <img src={gallery_2} alt="" />
-        <img src={gallery_3} alt="" />
-        <img src={gallery_4} alt="" />
+        <img data-aos="fade-up" className='h-50' src={s4} alt="" />
+        <img data-aos="fade-up" className='h-50' src={s5} alt="" />
+        <img data-aos="fade-up" className='h-50' src={s6} alt="" />
+        <img data-aos="fade-up" className='h-50' src={s7} alt="" />
       </div>
-      <button className='btn dark-btn'>See more here <img src={white_arrow} alt=''/></button>
+      <button data-aos="fade-up" className='btn dark-btn'>See more here <img src={white_arrow} alt=''/></button>
     </div>
   )
 }

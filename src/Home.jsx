@@ -8,19 +8,16 @@ import Campus from "./Components/Campus/Campus";
 import Testimonials from "./Components/Testimonials/Testimonials";
 import Contact from "./Components/Contact/Contact";
 import Footer from "./Components/Footer/Footer";
-import VideoPlayer from "./Components/VideoPlayer/VideoPlayer";
 
-function School() {
-  const [playState, setPlayState] = useState(false);
+function Home() {
   return (
     <div>
-      <Navbar />
+      
       <Hero />
       <div className="container">
         <Title subTitle="OUR PROGRAM" title="What We Offer" />
         <Programs />
-        {/* <About setPlayState/> */}
-        <About setPlayState={setPlayState} />
+        <About />
 
         <Title subTitle="Gallary" title="Campus Photos" />
         <Campus />
@@ -28,11 +25,10 @@ function School() {
         <Testimonials />
         <Title subTitle="Contact Us" title="Get in touch" />
         <Contact />
-        <Footer />
+        
       </div>
-      <VideoPlayer playState={playState} setPlayState={setPlayState} />
     </div>
   );
 }
 
-export default School;
+export default Home;

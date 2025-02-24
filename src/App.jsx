@@ -1,35 +1,14 @@
 import React from "react";
-import School from "./School";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import LoginPage from "./Components/Login/LoginPage";
-import Welcome from "./Components/Welcome/Welcome";
-import AuthProvider, { useAuth } from "./security/AuthContext";
+import PageRoutes from "./PageRoutes";
+import Navbar from "./Components/Navbar/Navbar";
+import Footer from "./Components/Footer/Footer";
 
-function AuthRoute({ children }) {
-  const authContext = useAuth();
-  if (authContext.isAuth) return children;
-  return <Navigate to="/" />;
-}
 const App = () => {
   return (
     <div>
-      <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<School />} />
-
-            <Route path="/login" element={<LoginPage />} />
-            <Route
-              path="/welcome"
-              element={
-                <AuthRoute>
-                  <Welcome />
-                </AuthRoute>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
+      
+      <PageRoutes />
+      <Footer />
     </div>
   );
 };
